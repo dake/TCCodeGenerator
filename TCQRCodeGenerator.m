@@ -22,7 +22,7 @@
     [filter setValue:data forKey:@"inputMessage"];
     [filter setValue:@"Q" forKey:@"inputCorrectionLevel"]; //设置纠错等级越高；即识别越容易，值可设置为L(Low) |  M(Medium) | Q | H(High)
     CIImage *image = filter.outputImage;
-    
+
     // create NonInterpolated UIImage Form CIImage
     CGRect extent = CGRectIntegral(image.extent);
     CGFloat scale = [UIScreen mainScreen].scale;
@@ -67,7 +67,9 @@
     CGImageRef scaledImage = CGBitmapContextCreateImage(ctx);
     CGImageRelease(imgRef);
     CGContextRelease(ctx);
-    return [UIImage imageWithCGImage:scaledImage scale:scale orientation:UIImageOrientationUp];
+    UIImage *img = [UIImage imageWithCGImage:scaledImage scale:scale orientation:UIImageOrientationUp];
+    CGImageRelease(scaledImage);
+    return img;
 }
 
 @end
