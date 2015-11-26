@@ -7,6 +7,7 @@
 //
 
 #import "TCCodeGenerator.h"
+#import <CoreImage/CoreImage.h>
 
 
 @implementation TCCodeGenerator
@@ -20,7 +21,9 @@
     CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
     [filter setDefaults];
     [filter setValue:data forKey:@"inputMessage"];
-    [filter setValue:@(inputQuietSpace) forKey:@"inputQuietSpace"];
+    if ([filter respondsToSelector:NSSelectorFromString(@"setInputQuietSpace:")]) {
+        [filter setValue:@(inputQuietSpace) forKey:@"inputQuietSpace"];
+    }
     
     return [self nonInterpolatedImageFrom:filter.outputImage width:size color:color];
 }
@@ -34,7 +37,9 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIAztecCodeGenerator"];
     [filter setDefaults];
     [filter setValue:data forKey:@"inputMessage"];
-    [filter setValue:@(inputCorrectionLevel) forKey:@"inputCorrectionLevel"];
+    if ([filter respondsToSelector:NSSelectorFromString(@"setInputCorrectionLevel:")]) {
+        [filter setValue:@(inputCorrectionLevel) forKey:@"inputCorrectionLevel"];
+    }
     
     return [self nonInterpolatedImageFrom:filter.outputImage width:size color:color];
 }
@@ -49,8 +54,10 @@
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     [filter setDefaults];
     [filter setValue:data forKey:@"inputMessage"];
-    NSString *level = [NSString stringWithFormat:@"%c", inputCorrectionLevel];
-    [filter setValue:level forKey:@"inputCorrectionLevel"];
+    if ([filter respondsToSelector:NSSelectorFromString(@"setInputCorrectionLevel:")]) {
+        NSString *level = [NSString stringWithFormat:@"%c", inputCorrectionLevel];
+        [filter setValue:level forKey:@"inputCorrectionLevel"];
+    }
     return [self nonInterpolatedImageFrom:filter.outputImage width:size color:color];
 }
 
@@ -105,6 +112,7 @@
     CGContextRelease(ctx);
     UIImage *img = [UIImage imageWithCGImage:scaledImage scale:scale orientation:UIImageOrientationUp];
     CGImageRelease(scaledImage);
+    
     return img;
 }
 

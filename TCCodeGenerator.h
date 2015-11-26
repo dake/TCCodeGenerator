@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TCCode128BarcodeInputQuietSpace) {
 };
 
 
-NS_CLASS_AVAILABLE_IOS(7_0) @interface TCCodeGenerator : NSObject
+NS_CLASS_AVAILABLE_IOS(6_0) @interface TCCodeGenerator : NSObject
 
 /**
  @brief	<#Description#>
@@ -53,6 +53,6 @@ NS_CLASS_AVAILABLE_IOS(7_0) @interface TCCodeGenerator : NSObject
 
 + (UIImage *)AztecCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCAztecCodeInputCorrectionLevel)inputCorrectionLevel;
 
-+ (UIImage *)Code128BarcodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputQuietSpace:(TCCode128BarcodeInputQuietSpace)inputQuietSpace;
++ (UIImage *)Code128BarcodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputQuietSpace:(TCCode128BarcodeInputQuietSpace)inputQuietSpace  NS_AVAILABLE_IOS(8_0);
 
 @end
