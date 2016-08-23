@@ -1,21 +1,21 @@
 //
 //  TCCodeGenerator.h
-//  Dake
+//  TCKit
 //
 //  Created by dake on 15/7/10.
-//  Copyright (c) 2015年 Dake. All rights reserved.
+//  Copyright (c) 2015年 dake. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
-typedef NS_ENUM(char, TCQCCodeInputCorrectionLevel) {
+typedef NS_ENUM(char, TCQRCodeInputCorrectionLevel) {
+    kTCQRCodeInputCorrectionLevelLow = 'L', // 7% of codewords can be restored.
+    kTCQRCodeInputCorrectionLevelMedium = 'M', // 15% of codewords can be restored.
+    kTCQRCodeInputCorrectionLevelQuartile = 'Q', // 25% of codewords can be restored.
+    kTCQRCodeInputCorrectionLevelHigh = 'H', // 30% of codewords can be restored.
     
-    kTCQCCodeInputCorrectionLevelLow = 'L',
-    kTCQCCodeInputCorrectionLevelMedium = 'M',
-    kTCQCCodeInputCorrectionLevelHight = 'H',
-    
-    kTCQCCodeInputCorrectionLevelDefault = kTCQCCodeInputCorrectionLevelMedium,
+    kTCQCCodeInputCorrectionLevelDefault = kTCQRCodeInputCorrectionLevelMedium,
 };
 
 typedef NS_ENUM(NSInteger, TCAztecCodeInputCorrectionLevel) {
@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, TCAztecCodeInputCorrectionLevel) {
 
 
 typedef NS_ENUM(NSInteger, TCCode128BarcodeInputQuietSpace) {
-    
     kTCCode128BarcodeInputQuietSpaceDefault = 7,
     kTCCode128BarcodeInputQuietSpaceMax = 20,
     kTCCode128BarcodeInputQuietSpaceMin = 0,
@@ -49,7 +48,7 @@ NS_CLASS_AVAILABLE_IOS(6_0) @interface TCCodeGenerator : NSObject
  
  @return <#return value description#>
  */
-+ (UIImage *)QRCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCQCCodeInputCorrectionLevel)inputCorrectionLevel;
++ (UIImage *)QRCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCQRCodeInputCorrectionLevel)inputCorrectionLevel;
 
 + (UIImage *)AztecCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCAztecCodeInputCorrectionLevel)inputCorrectionLevel;
 

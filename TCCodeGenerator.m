@@ -1,9 +1,9 @@
 //
 //  TCCodeGenerator.m
-//  Dake
+//  TCKit
 //
 //  Created by dake on 15/7/10.
-//  Copyright (c) 2015年 Dake. All rights reserved.
+//  Copyright (c) 2015年 dake. All rights reserved.
 //
 
 #import "TCCodeGenerator.h"
@@ -44,7 +44,7 @@
     return [self nonInterpolatedImageFrom:filter.outputImage width:size color:color];
 }
 
-+ (UIImage *)QRCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCQCCodeInputCorrectionLevel)inputCorrectionLevel
++ (UIImage *)QRCodeWithString:(NSString *)str width:(CGFloat)size color:(UIColor *)color inputCorrectionLevel:(TCQRCodeInputCorrectionLevel)inputCorrectionLevel
 {
     if (str.length < 1) {
         return nil;
@@ -68,7 +68,7 @@
 {
     // create NonInterpolated UIImage Form CIImage
     CGRect extent = CGRectIntegral(image.extent);
-    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat scale = UIScreen.mainScreen.scale;
     
     CGFloat ratio = MIN(size * scale / CGRectGetWidth(extent), size * scale / CGRectGetHeight(extent));
     size_t width = CGRectGetWidth(extent) * ratio;
